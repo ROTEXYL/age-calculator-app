@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
+        <link rel="stylesheet" href="./dist/output.css" />
+        <title>Frontend Mentor | Age calculator app</title>
+    </head>
+    <body class="bg-gray-200 relative">
+        <div class="flex-col min-h-screen md:flex-row items-center justify-center p-20">
+            <div
+                class="container h-[65%] bg-white rounded-2xl rounded-br-[80px] shadow-lg w-full max-w-md p-8 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+                <div class="flex gap-2 md:gap-3 mb-8">
+                    <div class="flex-1">
+                        <label
+                            for="day"
+                            id="day-label"
+                            class="block text-xs font-bold text-gray-500 mb-1"
+                            >DAY</label
+                        >
+                        <input
+                            type="text"
+                            id="day"
+                            placeholder="DD"
+                            maxlength="2"
+                            class="w-full p-3 border border-gray-300 rounded-lg text-xl font-bold focus:border-purple-600 focus:outline-none"
+                        />
+                        <p
+                            class="text-red-400 text-xs mt-2 h-4 leading-tight truncate"
+                            id="error-day"
+                        ></p>
+                    </div>
+                    <div class="flex-1">
+                        <label
+                            for="month"
+                            id="month-label"
+                            class="block text-xs font-bold text-gray-500 mb-1"
+                            >MONTH</label
+                        >
+                        <input
+                            type="text"
+                            id="month"
+                            placeholder="MM"
+                            maxlength="2"
+                            class="w-full p-3 border border-gray-300 rounded-lg text-xl font-bold focus:border-purple-600 focus:outline-none"
+                        />
+                        <p
+                            class="text-red-400 text-xs mt-2 h-4 leading-tight truncate"
+                            id="error-month"
+                        ></p>
+                    </div>
+                    <div class="flex-1">
+                        <label
+                            for="year"
+                            id="year-label"
+                            class="block text-xs font-bold text-gray-500 mb-1"
+                            >YEAR</label
+                        >
+                        <input
+                            type="text"
+                            id="year"
+                            placeholder="YYYY"
+                            maxlength="4"
+                            class="w-full p-3 border border-gray-300 rounded-lg text-xl font-bold focus:border-purple-600 focus:outline-none"
+                        />
+                        <p
+                            class="text-red-400 text-xs mt-2 h-4 leading-tight truncate"
+                            id="error-year"
+                        ></p>
+                    </div>
+                </div>
+                <div class="mt-11 md:mt-10 relative">
+                    <div>
+                        <hr class="border-gray-300" />
+                    </div>
+                    <div>
+                        <button
+                            class="bg-purple-600 rounded-full w-12 h-12 absolute left-1/2 -translate-x-1/2 -top-5 md:left-auto md:translate-x-0 transition-all duration-200 hover:bg-black md:right-0"
+                        >
+                            <img
+                                src="assets/images/icon-arrow.svg"
+                                id="arrowIcon"
+                                class="w-6 flex-col justify-self-center self-center"
+                            />
+                        </button>
+                    </div>
+                </div>
+                <div
+                    class="mt-8 flex-col justify-center items-center text-center md:justify-items-start md:mt-4 md:space-y-4"
+                >
+                    <div class="flex gap-3 ml-5 justify-start items-start md:mb-0">
+                        <div
+                            class="hidden md:inline-block text-7xl font-bold text-purple-700 text-center"
+                        >
+                            --
+                        </div>
+                        <div class="text-[3.2rem] font-bold text-purple-700 md:hidden">38</div>
+                        <div class="text-[3.2rem] font-bold italic md:text-7xl" id="year-output">
+                            years
+                        </div>
+                    </div>
+                    <div class="flex gap-3 ml-5 justify-start items-start md:mb-0 md:ml-5">
+                        <div
+                            class="hidden md:inline-block text-7xl font-bold text-purple-700 text-center"
+                        >
+                            --
+                        </div>
+                        <div class="text-[3.2rem] font-bold text-purple-700 md:hidden">3</div>
+                        <div class="text-[3.2rem] font-bold italic md:text-7xl" id="month-output">
+                            months
+                        </div>
+                    </div>
+                    <div class="flex ml-5 justify-start items-start gap-2">
+                        <div
+                            class="hidden md:inline-block text-7xl font-bold text-purple-700 text-center"
+                        >
+                            --
+                        </div>
+                        <div class="text-[3.2rem] font-bold text-purple-700 md:hidden">26</div>
+                        <div class="text-[3.2rem] font-bold italic md:text-7xl" id="day-output">
+                            days
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
