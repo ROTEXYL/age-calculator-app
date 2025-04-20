@@ -8,11 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const errorMonth = document.getElementById('error-month');
   const errorYear = document.getElementById('error-year');
 
-  const yearOutput = document.getElementById('year-output');
-  const monthOutput = document.getElementById('month-output');
-  const dayOutput = document.getElementById('day-output');
+  const yearNumberMobile = document.querySelector('.flex.gap-3.ml-5.justify-start.items-start.md\\:mb-0 div:nth-child(2)');
+  const monthNumberMobile = document.querySelector('.flex.gap-3.ml-5.justify-start.items-start.md\\:ml-5 div:nth-child(2)');
+  const dayNumberMobile = document.querySelector('.flex.ml-5.justify-start.items-start.gap-2 div:nth-child(2)');
+  const yearNumberDesktop = document.querySelector('.hidden.md\\:inline-block.text-7xl');
+  const monthNumberDesktop = document.querySelectorAll('.hidden.md\\:inline-block.text-7xl')[1];
+  const dayNumberDesktop = document.querySelectorAll('.hidden.md\\:inline-block.text-7xl')[2];
 
   const dataDate = new Date();
+  let hasError = false;
+
   function resetBorders() {
     day.style.borderColor = '';
     month.style.borderColor = '';
@@ -21,29 +26,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('day-label').classList.remove('text-red-400');
     document.getElementById('month-label').classList.remove('text-red-400');
     document.getElementById('year-label').classList.remove('text-red-400');
-}
+  }
 
-day.addEventListener('input', () => {
+  day.addEventListener('input', () => {
     resetBorders();
     errorDay.innerText = '';
     focusNext();
-});
+  });
 
-month.addEventListener('input', () => {
+  month.addEventListener('input', () => {
     resetBorders();
     errorMonth.innerText = '';
     focusNext();
-});
+  });
 
-year.addEventListener('input', () => {
+  year.addEventListener('input', () => {
     resetBorders();
     errorYear.innerText = '';
-});
+  });
 
   arrowIcon.addEventListener('click', (e) => {
     errorDay.innerText = '';
     errorMonth.innerText = '';
     errorYear.innerText = '';
+    hasError = false;
 
     const dayVal = parseInt(day.value);
     const monthVal = parseInt(month.value);
@@ -75,47 +81,60 @@ year.addEventListener('input', () => {
       year.style.borderColor = 'red';
       document.getElementById('year-label').classList.add('text-red-400');
       hasError = true;
-    } if (monthVal > 12) {
+    } else if (monthVal < 1 || monthVal > 12) {
       e.preventDefault();
       errorMonth.innerText = 'Must be a valid Month';
       month.style.borderColor = 'red';
       document.getElementById('month-label').classList.add('text-red-400');
       hasError = true;
-    } if (dayVal > 31) {
+    } else if (dayVal < 1 || dayVal > 31) {
       e.preventDefault();
       errorDay.innerText = 'Must be a valid Day';
       day.style.borderColor = 'red';
       document.getElementById('day-label').classList.add('text-red-400');
       hasError = true;
-    } if (!hasError){
+    } else {
+      const daysInMonth = new Date(yearVal, monthVal, 0).getDate();
+      if (dayVal > daysInMonth) {
+        e.preventDefault();
+        errorDay.innerText = 'Must be a valid date';
+        day.style.borderColor = 'red';
+        document.getElementById('day-label').classList.add('text-red-400');
+        hasError = true;
+      }
+    }
+
+    if (!hasError){
       calculaIdade(yearVal, monthVal, dayVal);
     }
   });
 
   function calculaIdade(year, month, day) {
-    if (month > (dataDate.getMonth() + 1)) {
-      yearOutput.textContent = dataDate.getFullYear() - year - 1;
-    } else if (month === (dataDate.getMonth() + 1) && day > dataDate.getDate()) {
-      yearOutput.textContent = dataDate.getFullYear() - year - 1;
-    } else {
-      yearOutput.textContent = dataDate.getFullYear() - year;
+    const birthDate = new Date(year, month - 1, day);
+    const today = new Date();
+    
+    let years = today.getFullYear() - birthDate.getFullYear();
+    let months = today.getMonth() - birthDate.getMonth();
+    let days = today.getDate() - birthDate.getDate();
+    
+    if (days < 0) {
+        months--;
+        const lastDayOfLastMonth = new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+        days += lastDayOfLastMonth;
     }
-
-    if (month > (dataDate.getMonth() + 1)) {
-      monthOutput.textContent = 12 + ((dataDate.getMonth() + 1) - month);
-    } else {
-      monthOutput.textContent = (dataDate.getMonth() + 1) - month;
+    
+    if (months < 0) {
+        years--;
+        months += 12;
     }
-
-    if (day > dataDate.getDate() && month % 2 !== 0 || (dataDate.getMonth() + 1) == 8) {
-      dayOutput.textContent = 31 - (day - dataDate.getDate());
-    } else if (day < dataDate.getDate() && month % 2 !== 0 || (dataDate.getMonth() + 1) == 8) {
-      dayOutput.textContent = 31 + (day - dataDate.getDate());
-    } else if (day > dataDate.getDate() && month % 2 == 0 && (dataDate.getMonth() + 1) !== 8) {
-      dayOutput.textContent = 30 - (day - dataDate.getDate());
-    } else if (day < dataDate.getDate() && month % 2 == 0 && (dataDate.getMonth() + 1) !== 8) {
-      dayOutput.textContent = - (day - dataDate.getDate());
-    }
+    
+    yearNumberMobile.textContent = years;
+    monthNumberMobile.textContent = months;
+    dayNumberMobile.textContent = days;
+    
+    yearNumberDesktop.textContent = years;
+    monthNumberDesktop.textContent = months;
+    dayNumberDesktop.textContent = days;
   }
 
   function focusNext() {
