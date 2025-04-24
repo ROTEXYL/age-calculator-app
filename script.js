@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const yearNumberMobile = document.querySelector('.flex.gap-3.ml-5.justify-start.items-start.md\\:mb-0 div:nth-child(2)');
   const monthNumberMobile = document.querySelector('.flex.gap-3.ml-5.justify-start.items-start.md\\:ml-5 div:nth-child(2)');
   const dayNumberMobile = document.querySelector('.flex.ml-5.justify-start.items-start.gap-2 div:nth-child(2)');
-  const yearNumberDesktop = odcument.querySelector('.hidden.md\\:inline-block.text-7xl');
+  const yearNumberDesktop = document.querySelector('.hidden.md\\:inline-block.text-7xl');
   const monthNumberDesktop = document.querySelectorAll('.hidden.md\\:inline-block.text-7xl')[1];
   const dayNumberDesktop = document.querySelectorAll('.hidden.md\\:inline-block.text-7xl')[2];
 
